@@ -1,0 +1,75 @@
+<h2>Instructor Dashboard</h2>
+
+<p *ngIf="msg">{{ msg }}</p>
+
+<!-- Sessions table -->
+<div *ngIf="loadingSessions">Loading sessions...</div>
+
+<table class="grid" *ngIf="!loadingSessions && sessions.length">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Title</th>
+      <th>Dept</th>
+      <th>Credits</th>
+      <th>Days</th>
+      <th>Time</th>
+      <th>Location</th>
+      <th>Enrolled</th>
+      <th>Capacity</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of sessions">
+      <td>{{ s.code }}</td>
+      <td>{{ s.title }}</td>
+      <td>{{ s.department }}</td>
+      <td>{{ s.credits }}</td>
+      <td>{{ s.meetingDays }}</td>
+      <td>
+        <ng-container *ngIf="s.startTime && s.endTime; else noTime">
+          {{ s.startTime }}–{{ s.endTime }}
+        </ng-container>
+        <ng-template #noTime>—</ng-template>
+      </td>
+      <td>{{ s.location || '—' }}</td>
+      <td>{{ s.enrolled }}</td>
+      <td>{{ s.capacity }}</td>
+      <td>
+        <button class="btn" type="button" (click)="viewStudents(s)">
+          View Students
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Enrolled students table -->
+<div class="panel" *ngIf="selectedSession">
+  <h3>
+    Enrolled Students –
+    {{ getSessionLabel(selectedSession) }}
+  </h3>
+
+  <div *ngIf="loadingStudents">Loading students...</div>
+
+  <table class="grid" *ngIf="!loadingStudents && students.length">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let st of students">
+        <td>{{ st.lastName }}, {{ st.firstName }}</td>
+        <td>{{ st.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loadingStudents && !students.length">
+    No students enrolled yet for this session.
+  </p>
+</div>

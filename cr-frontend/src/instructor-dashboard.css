@@ -1,0 +1,41 @@
+h2 {
+  margin-bottom: 1rem;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.grid th,
+.grid td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.grid th {
+  background: #f5f5f5;
+  text-align: left;
+}
+
+.btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: none;
+  background: #0052cc;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #003c99;
+}
+
+.panel {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+}
