@@ -1,0 +1,33 @@
+<h2>Admin — Manage Courses</h2>
+
+<form class="form" (ngSubmit)="add()">
+  <input placeholder="Code (CSCI-101)" [(ngModel)]="code" name="code" required>
+  <input placeholder="Title" [(ngModel)]="title" name="title" required>
+  <input placeholder="Department" [(ngModel)]="department" name="department" required>
+  <input placeholder="Instructor" [(ngModel)]="instructor" name="instructor">
+  <input type="number" placeholder="Credits" [(ngModel)]="credits" name="credits" min="1" max="6">
+  <input type="number" placeholder="Capacity" [(ngModel)]="capacity" name="capacity" min="1" max="500">
+  <button class="btn">Add Course</button>
+</form>
+
+<table class="grid" *ngIf="courses.length">
+  <thead>
+    <tr>
+      <th>Code</th><th>Title</th><th>Dept</th><th>Instructor</th>
+      <th>Credits</th><th>Seats</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of courses">
+      <td>{{c.code}}</td>
+      <td>{{c.title}}</td>
+      <td>{{c.department}}</td>
+      <td>{{c.instructor}}</td>
+      <td>{{c.credits}}</td>
+      <td>{{c.enrolled}}/{{c.capacity}}</td>
+      <td><button class="btn danger" type="button" (click)="remove(c.id)">Remove</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!courses.length">No courses yet. Add one above.</p>

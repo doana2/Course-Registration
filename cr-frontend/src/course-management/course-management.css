@@ -1,0 +1,16 @@
+.form{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:12px
+}
+.form input{
+  padding:8px;border:1px solid #ddd;border-radius:8px
+}
+.btn{
+  padding:6px 10px;border:1px solid #ccc;border-radius:8px;background:#f8f8f8;cursor:pointer
+}
+.btn:hover{background:#eee}
+.btn.danger{border-color:#e6b0b0;background:#ffecec}
+.grid{width:100%;border-collapse:collapse}
+.grid th,.grid td{border-bottom:1px solid #eee;padding:8px;text-align:left}
