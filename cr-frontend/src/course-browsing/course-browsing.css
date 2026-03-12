@@ -1,0 +1,39 @@
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.filters input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.btn {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f8f8f8;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #eee;
+}
+.btn.ghost {
+  background: #fff;
+}
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+.grid th,
+.grid td {
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+  text-align: left;
+}
+.ok {
+  color: #0a7a29;
+}
+.err {
+  color: #b3001b;
+}

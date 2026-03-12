@@ -1,0 +1,66 @@
+<h2>Course Registration</h2>
+
+<form class="filters" (ngSubmit)="apply()">
+  <input
+    placeholder="Search title / code / instructor"
+    [(ngModel)]="q"
+    name="q"
+  />
+  <input
+    placeholder="Department (e.g., CSCI)"
+    [(ngModel)]="dept"
+    name="dept"
+  />
+  <button class="btn" [disabled]="loading">Apply</button>
+</form>
+
+<p *ngIf="loading">Loading courses...</p>
+<p class="ok" *ngIf="msg && !err">{{ msg }}</p>
+<p class="err" *ngIf="err">{{ err }}</p>
+
+<table class="grid" *ngIf="courses.length && !loading">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Title</th>
+      <th>Dept</th>
+      <th>Instructor</th>
+      <th>Credits</th>
+      <th>Seats</th>
+      <th>Meeting Times</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of courses">
+      <td>{{ c.code }}</td>
+      <td>{{ c.title }}</td>
+      <td>{{ c.department }}</td>
+      <td>{{ c.instructor }}</td>
+      <td>{{ c.credits }}</td>
+      <td>{{ c.enrolled }}/{{ c.capacity }}</td>
+      <td>
+        <span *ngIf="c.meetingDays">{{ c.meetingDays }} {{ c.startTime }}-{{ c.endTime }}</span>
+        <span *ngIf="!c.meetingDays">TBA</span>
+      </td>
+      <td>
+        <button
+          *ngIf="!isEnrolled(c.id)"
+          type="button"
+          class="btn"
+          (click)="enroll(c.id)"
+          [disabled]="loading || c.enrolled >= c.capacity">
+          {{ c.enrolled >= c.capacity ? 'Full' : 'Enroll' }}
+        </button>
+        <button
+          *ngIf="isEnrolled(c.id)"
+          type="button"
+          class="btn ghost"
+          (click)="drop(c.id)"
+          [disabled]="loading">
+          Drop
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
