@@ -1,0 +1,120 @@
+<div class="page">
+  <!-- Headings by role -->
+  <h1 *ngIf="role === 'student'">My Schedule</h1>
+  <h1 *ngIf="role === 'instructor'">My Teaching Schedule</h1>
+  <h1 *ngIf="role === 'admin'">Admin Overview</h1>
+
+  <!-- 🧑‍🎓 STUDENT VIEW -->
+  <section *ngIf="role === 'student'">
+    <p *ngIf="loading">Loading your schedule...</p>
+    <p class="err" *ngIf="error">{{ error }}</p>
+
+    <p *ngIf="!loading && !error && !myCourses.length">
+      You are not enrolled in any courses.
+    </p>
+
+    <table *ngIf="myCourses.length && !loading" class="grid">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th>Dept</th>
+          <th>Instructor</th>
+          <th>Credits</th>
+          <th>Meeting Times</th>
+          <th>Location</th>
+          <th>Term</th>
+          <th>Modality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of myCourses">
+          <td>{{ c.code }}</td>
+          <td>{{ c.title }}</td>
+          <td>{{ c.department }}</td>
+          <td>{{ c.instructor }}</td>
+          <td>{{ c.credits }}</td>
+          <td>
+            <span *ngIf="c.meetingDays">{{ c.meetingDays }} {{ c.startTime }}-{{ c.endTime }}</span>
+            <span *ngIf="!c.meetingDays">TBA</span>
+          </td>
+          <td>{{ c.location || 'TBA' }}</td>
+          <td>{{ c.term || 'N/A' }}</td>
+          <td>{{ c.modality || 'N/A' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 👨‍🏫 INSTRUCTOR VIEW -->
+  <section *ngIf="role === 'instructor'">
+    <p *ngIf="!instructorSessions.length">
+      You are not assigned to any sessions.
+    </p>
+
+    <table *ngIf="instructorSessions.length" class="grid">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th>Dept</th>
+          <th>Credits</th>
+          <th>Seats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of instructorSessions">
+          <td>{{ c.code }}</td>
+          <td>{{ c.title }}</td>
+          <td>{{ c.department }}</td>
+          <td>{{ c.credits }}</td>
+          <td>{{ c.enrolled }}/{{ c.capacity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 🛠 ADMIN VIEW -->
+  <section *ngIf="role === 'admin'">
+    <div class="cards">
+      <div class="card">
+        <h2>Total Courses</h2>
+        <p>{{ totalCourses }}</p>
+      </div>
+      <div class="card">
+        <h2>Total Capacity</h2>
+        <p>{{ totalCapacity }}</p>
+      </div>
+      <div class="card">
+        <h2>Total Enrolled</h2>
+        <p>{{ totalEnrolled }}</p>
+      </div>
+      <div class="card">
+        <h2>Average Fill %</h2>
+        <p>{{ averageFillPercent }}%</p>
+      </div>
+    </div>
+
+    <h2>All Courses</h2>
+    <table class="grid" *ngIf="allCourses.length">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th>Dept</th>
+          <th>Instructor</th>
+          <th>Seats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of allCourses">
+          <td>{{ c.code }}</td>
+          <td>{{ c.title }}</td>
+          <td>{{ c.department }}</td>
+          <td>{{ c.instructor }}</td>
+          <td>{{ c.enrolled }}/{{ c.capacity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
