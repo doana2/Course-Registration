@@ -1,0 +1,15 @@
+<nav class="nav">
+  <a routerLink="/courses" class="brand">Course Reg</a>
+
+  <div class="links" *ngIf="loggedIn; else loggedOut">
+    <a routerLink="/courses">Browse Courses</a>
+    <a routerLink="/dashboard" *ngIf="isStudent">My Schedule</a>
+    <a routerLink="/instructor" *ngIf="isInstructorOrAdmin">Instructor</a>
+    <a routerLink="/admin" *ngIf="isAdmin">Admin</a>
+    <button class="link" type="button" (click)="logout()">Logout</button>
+  </div>
+
+  <ng-template #loggedOut>
+    <a routerLink="/login">Login</a>
+  </ng-template>
+</nav>
