@@ -1,0 +1,15 @@
+.login-container {
+  width: 350px;
+  margin: 70px auto;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+input {
+  width: 100%;
+  padding: 8px;
+}
+.error {
+  color: red;
+  margin-top: 10px;
+}
